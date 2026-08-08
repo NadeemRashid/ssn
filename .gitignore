@@ -1,0 +1,10 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Gemini Agent/IDE logs or scratchpads (if any)
+.gemini/
+.agents/
+walkthrough.md
+task.md
+implementation_plan.md
