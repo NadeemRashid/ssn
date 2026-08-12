@@ -846,72 +846,7 @@ nav a:hover, nav a.active {
   right: 2rem;
 }
 
-/* --- Testimonials --- */
-.testimonials {
-  padding: 8rem 0;
-  background-color: var(--bg-primary);
-  border-bottom: 1px solid var(--border);
-}
 
-.testimonials-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  text-align: center;
-}
-
-.testimonial-slide {
-  display: none;
-  animation: fadeIn 0.8s var(--ease-custom);
-}
-
-.testimonial-slide.active {
-  display: block;
-}
-
-.testimonial-stars {
-  color: var(--accent);
-  margin-bottom: 2rem;
-  letter-spacing: 0.2em;
-}
-
-.testimonial-quote {
-  font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--primary);
-  margin-bottom: 2.5rem;
-}
-
-.testimonial-author {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.testimonial-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 3rem;
-}
-
-.testimonial-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--border-gold);
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.testimonial-dot.active {
-  background-color: var(--accent-dark);
-  transform: scale(1.3);
-}
 
 /* --- FAQ & Accordion --- */
 .faq-section {

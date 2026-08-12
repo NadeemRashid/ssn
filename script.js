@@ -59,96 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ==========================================
-  // 3. Editorial Testimonial Carousel (Dynamic)
-  // ==========================================
-  const defaultTestimonials = [
-    { stars: 5, quote: "SSN Care Solutions was a godsend for our family. When my mother, who suffers from severe dementia, neglected her home and began hoarding, we didn't know who to call. The team's social work background meant they treated her with absolute dignity, respect, and kindness. The results were life-changing.", author: "Sarah H. — Family Caregiver, Birmingham" },
-    { stars: 5, quote: "Unbelievably thorough and professional. As a clinical team lead coordinating hospital discharges, we need quick turnaround times to ensure homes are clinically clean before patients arrive back. SSN Care Solutions is reliable, compliant with all healthcare sanitization standards, and highly sensitive to patients.", author: "Dr. James K. — NHS Discharge Coordinator" },
-    { stars: 5, quote: "They understand what care cleaning really means. They don't just scrub the floors; they make sure my uncle feels safe, comfortable, and independent in his space. Their eco-friendly practices are excellent, and the CQC-registered management gives us complete peace of mind.", author: "Mark D. — Guardian, Manchester" }
-  ];
 
-  // Load visibility and array from localStorage
-  const testimonialsVisible = localStorage.getItem('ssn_testimonials_visible') !== 'false';
-  const testimonialsSection = document.getElementById('testimonials-section');
-  
-  if (testimonialsSection) {
-    testimonialsSection.style.display = testimonialsVisible ? 'block' : 'none';
-  }
-
-  const savedTestimonials = localStorage.getItem('ssn_testimonials');
-  const testimonialsList = savedTestimonials ? JSON.parse(savedTestimonials) : defaultTestimonials;
-  
-  // Write default to localStorage if not exists so CMS can read it
-  if (!savedTestimonials) {
-    localStorage.setItem('ssn_testimonials', JSON.stringify(defaultTestimonials));
-  }
-  if (localStorage.getItem('ssn_testimonials_visible') === null) {
-    localStorage.setItem('ssn_testimonials_visible', 'true');
-  }
-
-  const carouselContainer = document.getElementById('testimonials-carousel');
-  
-  if (carouselContainer && testimonialsVisible && testimonialsList.length > 0) {
-    // Generate slides HTML
-    testimonialsList.forEach((t, index) => {
-      const slide = document.createElement('div');
-      slide.className = `testimonial-slide${index === 0 ? ' active' : ''}`;
-      
-      let starsHTML = '';
-      for (let s = 0; s < t.stars; s++) starsHTML += '★';
-      
-      slide.innerHTML = `
-        <div class="testimonial-stars" aria-label="${t.stars} out of 5 stars">${starsHTML}</div>
-        <blockquote class="testimonial-quote">"${t.quote}"</blockquote>
-        <cite class="testimonial-author">${t.author}</cite>
-      `;
-      // Insert slide before the dots nav container
-      const navContainer = carouselContainer.querySelector('.testimonial-nav');
-      carouselContainer.insertBefore(slide, navContainer);
-    });
-
-    const slides = carouselContainer.querySelectorAll('.testimonial-slide');
-    const dotsContainer = carouselContainer.querySelector('.testimonial-nav');
-    let currentSlideIndex = 0;
-    let testimonialInterval;
-
-    if (slides.length > 0 && dotsContainer) {
-      // Generate navigation dots
-      slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('testimonial-dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => showSlide(index));
-        dotsContainer.appendChild(dot);
-      });
-
-      const dots = dotsContainer.querySelectorAll('.testimonial-dot');
-
-      function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlideIndex = index;
-        
-        resetAutoplay();
-      }
-
-      function nextSlide() {
-        let nextIndex = (currentSlideIndex + 1) % slides.length;
-        showSlide(nextIndex);
-      }
-
-      function resetAutoplay() {
-        clearInterval(testimonialInterval);
-        testimonialInterval = setInterval(nextSlide, 7000);
-      }
-
-      resetAutoplay();
-    }
-  }
 
   // ==========================================
   // 4. Interactive Accordion (FAQ)
@@ -293,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 9. Interactive Gallery & Lightbox Logic
   // ==========================================
-  const defaultGalleryItems = [
+  const galleryItems = [
     { src: 'work/0745f37b-2ee1-4afd-a3c5-b6e7a759b194.jpg', category: 'kitchen', caption: 'Kitchen Counter Deep Sanitization' },
     { src: 'work/07c217bf-8f00-4710-ba14-fc19f9240845.jpg', category: 'living', caption: 'Living Space De-clutter & Clean' },
     { src: 'work/1376bfd6-b6d4-4751-8fbc-90080903d44b.jpg', category: 'bathroom', caption: 'Bathroom Clinical Scrub' },
@@ -311,13 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'work/7273b730-afa0-4044-a02f-4146eaa14a71.jpg', category: 'living', caption: 'Corridor Clear-out & Sanitization' },
     { src: 'work/7586e69b-8813-4b43-8c38-3810bfd068c6.jpg', category: 'living', caption: 'Window Frame & Glass Polishing' }
   ];
-
-  const savedGalleryItems = localStorage.getItem('ssn_gallery_items');
-  const galleryItems = savedGalleryItems ? JSON.parse(savedGalleryItems) : defaultGalleryItems;
-  
-  if (!savedGalleryItems) {
-    localStorage.setItem('ssn_gallery_items', JSON.stringify(defaultGalleryItems));
-  }
 
   const galleryGrid = document.getElementById('gallery-grid');
   const loadMoreBtn = document.getElementById('load-more-btn');
