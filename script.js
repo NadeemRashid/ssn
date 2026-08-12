@@ -162,35 +162,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Simulate beautiful feedback
     const originalBtn = form.querySelector('button[type="submit"]');
     const originalText = originalBtn.innerHTML;
-    originalBtn.innerHTML = 'Sending request...';
+    originalBtn.innerHTML = 'Sending...';
     originalBtn.disabled = true;
 
-    setTimeout(() => {
-      originalBtn.innerHTML = 'Success ✓';
-      originalBtn.style.backgroundColor = '#2E7D32';
-      originalBtn.style.borderColor = '#2E7D32';
-      originalBtn.style.color = '#ffffff';
+    const formData = new FormData(form);
 
-      // Show alert popup
-      alert(`Thank you for choosing SSN Care Solutions! \nYour ${formType} has been received. A qualified care manager will review your details and contact you within 24 hours to schedule a consultation.`);
-      
-      // Reset form
-      form.reset();
-      
-      if (formType === 'Consultation Request') {
-        closeModal();
+    fetch('https://formspree.io/nadeemrashid87@gmail.com', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
       }
+    })
+    .then(response => {
+      if (response.ok) {
+        originalBtn.innerHTML = 'Sent ✓';
+        originalBtn.style.backgroundColor = '#2E7D32';
+        originalBtn.style.borderColor = '#2E7D32';
+        originalBtn.style.color = '#ffffff';
 
-      // Reset Button styles after timeout
+        alert(`Thank you for choosing SSN Care Solutions! \nYour ${formType} has been successfully sent. A qualified care manager will review your details and contact you within 24 hours to schedule a consultation.`);
+        
+        form.reset();
+        if (formType === 'Consultation Request') {
+          closeModal();
+        }
+      } else {
+        throw new Error('Response not OK');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      originalBtn.innerHTML = 'Error ✗';
+      originalBtn.style.backgroundColor = '#d32f2f';
+      originalBtn.style.borderColor = '#d32f2f';
+      originalBtn.style.color = '#ffffff';
+      alert('Oops! There was a problem submitting your form. Please try again or email us directly at info@ssncaresolutions.com.');
+    })
+    .finally(() => {
       setTimeout(() => {
         originalBtn.innerHTML = originalText;
         originalBtn.style.backgroundColor = '';
         originalBtn.style.borderColor = '';
         originalBtn.style.color = '';
         originalBtn.disabled = false;
-      }, 3000);
-
-    }, 1500);
+      }, 4000);
+    });
   }
 
   if (contactForm) {
