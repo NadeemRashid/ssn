@@ -230,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Lightbox Elements
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxCaption = document.getElementById('lightbox-caption');
   const lightboxClose = document.querySelector('.lightbox-close');
   const lightboxPrev = document.querySelector('.lightbox-prev');
   const lightboxNext = document.querySelector('.lightbox-next');
@@ -288,10 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
       itemEl.innerHTML = `
         <img src="${item.src}" alt="${item.caption}" loading="lazy">
         <div class="gallery-overlay">
-          <h4>${item.caption}</h4>
-          <span>${formatCategoryName(item.category)}</span>
           <div class="gallery-zoom-icon" aria-label="Enlarge image">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
         </div>
       `;
@@ -341,7 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentItem) {
       lightboxImg.src = currentItem.src;
       lightboxImg.alt = currentItem.caption;
-      lightboxCaption.textContent = currentItem.caption;
     }
   }
 
