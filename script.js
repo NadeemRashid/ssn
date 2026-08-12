@@ -165,12 +165,18 @@ document.addEventListener('DOMContentLoaded', () => {
     originalBtn.innerHTML = 'Sending...';
     originalBtn.disabled = true;
 
+    // Convert FormData to a plain object
     const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
 
-    fetch('https://formspree.io/nadeemrashid87@gmail.com', {
+    fetch('/api/send', {
       method: 'POST',
-      body: formData,
+      body: JSON.stringify(data),
       headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     })
