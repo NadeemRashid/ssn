@@ -130,134 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ==========================================
-  // 5. Instant Cleaning Estimate Calculator
-  // ==========================================
-  const calcServiceOptions = document.querySelectorAll('.option-card');
-  const calcBedroomsSlider = document.getElementById('calc-bedrooms');
-  const calcBathroomsSlider = document.getElementById('calc-bathrooms');
-  const calcBedroomsValue = document.getElementById('calc-bedrooms-val');
-  const calcBathroomsValue = document.getElementById('calc-bathrooms-val');
-  const calcAddons = document.querySelectorAll('.calculator-form-group input[type="checkbox"]');
-  
-  // Results Elements
-  const priceDisplay = document.getElementById('estimated-price');
-  const detailServiceText = document.getElementById('detail-service');
-  const detailHomeSizeText = document.getElementById('detail-home-size');
-  const detailExtrasText = document.getElementById('detail-extras');
 
-  let selectedService = 'standard';
-  let selectedMultiplier = 1.0;
-  let serviceName = 'Standard Cleaning';
-
-  if (calcBedroomsSlider && calcBathroomsSlider) {
-    
-    // Select Service Card
-    calcServiceOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        calcServiceOptions.forEach(o => o.classList.remove('selected'));
-        option.classList.add('selected');
-        
-        selectedService = option.dataset.service;
-        selectedMultiplier = parseFloat(option.dataset.multiplier);
-        serviceName = option.querySelector('h4').textContent;
-        
-        calculatePrice();
-      });
-    });
-
-    // Update Slider Labels on Input
-    calcBedroomsSlider.addEventListener('input', (e) => {
-      calcBedroomsValue.textContent = e.target.value;
-      calculatePrice();
-    });
-
-    calcBathroomsSlider.addEventListener('input', (e) => {
-      calcBathroomsValue.textContent = e.target.value;
-      calculatePrice();
-    });
-
-    // Addons trigger change
-    calcAddons.forEach(addon => {
-      addon.addEventListener('change', calculatePrice);
-    });
-
-    function calculatePrice() {
-      // Pricing Constants
-      const BASE_FLAT_RATE = 75; // Starting base price
-      const PRICE_PER_BEDROOM = 25;
-      const PRICE_PER_BATHROOM = 15;
-      
-      const bedrooms = parseInt(calcBedroomsSlider.value);
-      const bathrooms = parseInt(calcBathroomsSlider.value);
-      
-      // Calculate Room Costs
-      const roomsTotal = (bedrooms * PRICE_PER_BEDROOM) + (bathrooms * PRICE_PER_BATHROOM);
-      
-      // Base Price before multipliers/addons
-      let subtotal = BASE_FLAT_RATE + roomsTotal;
-      
-      // Apply service multiplier
-      subtotal *= selectedMultiplier;
-      
-      // Calculate Extras
-      let extrasTotal = 0;
-      let selectedAddonsList = [];
-      
-      calcAddons.forEach(addon => {
-        if (addon.checked) {
-          const cost = parseFloat(addon.dataset.cost);
-          extrasTotal += cost;
-          selectedAddonsList.push(addon.name);
-        }
-      });
-      
-      // Final Sum
-      const finalPrice = Math.round(subtotal + extrasTotal);
-      
-      // Update UI displays with counting transition
-      animatePrice(finalPrice);
-      
-      // Update Details Display
-      detailServiceText.textContent = serviceName;
-      detailHomeSizeText.textContent = `${bedrooms} Bed, ${bathrooms} Bath`;
-      detailExtrasText.textContent = selectedAddonsList.length > 0 
-        ? selectedAddonsList.join(', ') 
-        : 'None selected';
-    }
-
-    // Helper to animate price transition
-    let currentDisplayedPrice = 75;
-    function animatePrice(targetPrice) {
-      const duration = 400; // ms
-      const startTime = performance.now();
-      const startPrice = currentDisplayedPrice;
-      
-      function update(currentTime) {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        
-        // Easing function outQuad
-        const ease = progress * (2 - progress);
-        const currentVal = Math.round(startPrice + (targetPrice - startPrice) * ease);
-        
-        priceDisplay.textContent = currentVal;
-        currentDisplayedPrice = currentVal;
-        
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        } else {
-          priceDisplay.textContent = targetPrice;
-          currentDisplayedPrice = targetPrice;
-        }
-      }
-      
-      requestAnimationFrame(update);
-    }
-
-    // Initial Pricing Calculation
-    calculatePrice();
-  }
 
   // ==========================================
   // 6. Booking & Consultation Modal Logic
@@ -269,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // All Trigger Buttons
   const openModalBtns = document.querySelectorAll('[data-open-modal]');
-  const bookEstimateBtn = document.getElementById('book-estimate-btn');
 
   // Input elements in Modal to autofill
   const modalServiceSelect = document.getElementById('modal-service');
@@ -295,28 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (modalClose) modalClose.addEventListener('click', closeModal);
     if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
-    
-    // Autofill Modal details from Calculator Selection
-    if (bookEstimateBtn) {
-      bookEstimateBtn.addEventListener('click', () => {
-        // Map selected calculator service to Modal service list
-        if (modalServiceSelect) {
-          if (selectedService === 'standard') modalServiceSelect.value = 'General Cleaning';
-          else if (selectedService === 'deep') modalServiceSelect.value = 'Deep Cleaning & Sanitization';
-          else if (selectedService === 'infection') modalServiceSelect.value = 'Infection Control / Sanitization';
-          else if (selectedService === 'hoarding') modalServiceSelect.value = 'Specialist Care & Hoarding Support';
-        }
-        
-        // Write message context
-        if (modalMessageArea) {
-          const bedrooms = calcBedroomsSlider.value;
-          const bathrooms = calcBathroomsSlider.value;
-          modalMessageArea.value = `Calculated Estimate: £${priceDisplay.textContent}. \nHome Details: ${bedrooms} Bedrooms, ${bathrooms} Bathrooms. \nService Selection: ${serviceName}.`;
-        }
-        
-        openModal();
-      });
-    }
   }
 
   // ==========================================

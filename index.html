@@ -43,7 +43,6 @@
         <a href="#about">About</a>
         <a href="#why-choose-us">Why Choose Us</a>
         <a href="#services">Our Services</a>
-        <a href="#calculator">Pricing Estimate</a>
         <a href="#contact">Contact</a>
         <a href="#consultation-modal" class="btn btn-primary" style="padding: 0.7rem 1.4rem; font-size: 0.75rem;" data-open-modal>Request Quote</a>
       </nav>
@@ -67,8 +66,8 @@
             SSN Care Solutions was created by social workers and CQC registered care managers. We therefore understand the needs of those receiving care and support whilst living in their own homes. We clean because we care.
           </p>
           <div class="hero-ctas">
-            <a href="#calculator" class="btn btn-primary">Estimate Pricing</a>
-            <button class="btn btn-secondary" data-open-modal>Schedule Consult</button>
+            <button class="btn btn-primary" data-open-modal>Request a Quote</button>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
           </div>
         </div>
         
@@ -243,7 +242,7 @@
             <h3>Daily & Weekly Cleaning</h3>
             <p>Regular maintenance, light housekeeping, dusting, vacuuming, and general upkeep on a schedules plan that suits your routine.</p>
           </div>
-          <a href="#calculator" class="btn-text">Estimate Cost</a>
+          <button class="btn-text" data-open-modal>Inquire Now</button>
         </div>
 
         <!-- 2. Deep cleaning and sanitization -->
@@ -252,7 +251,7 @@
             <h3>Deep Cleaning & Sanitization</h3>
             <p>A rigorous, top-to-bottom scrub down of kitchens, bathrooms, high-touch points, and baseboards to eliminate persistent dirt.</p>
           </div>
-          <a href="#calculator" class="btn-text">Estimate Cost</a>
+          <button class="btn-text" data-open-modal>Inquire Now</button>
         </div>
 
         <!-- 3. Carpet and upholstery cleaning -->
@@ -261,7 +260,7 @@
             <h3>Carpet & Upholstery Cleaning</h3>
             <p>Eco-friendly, deep-steam extraction to remove embedded dust, dirt, allergens, and stains from carpets, sofas, and fabrics.</p>
           </div>
-          <a href="#calculator" class="btn-text">Estimate Cost</a>
+          <button class="btn-text" data-open-modal>Inquire Now</button>
         </div>
 
         <!-- 4. Window washing -->
@@ -270,7 +269,7 @@
             <h3>Window Washing</h3>
             <p>Streak-free interior and exterior window glass cleaning to maximize natural light and improve the layout ambience.</p>
           </div>
-          <a href="#calculator" class="btn-text">Estimate Cost</a>
+          <button class="btn-text" data-open-modal>Inquire Now</button>
         </div>
 
         <!-- 5. Restroom sanitation -->
@@ -279,7 +278,7 @@
             <h3>Restroom Sanitation</h3>
             <p>Disinfecting procedures utilizing medical-grade sanitizing solutions on all restroom fixtures, tile, and flooring.</p>
           </div>
-          <a href="#calculator" class="btn-text">Estimate Cost</a>
+          <button class="btn-text" data-open-modal>Inquire Now</button>
         </div>
 
         <!-- 6. Infection control cleaning -->
@@ -288,7 +287,7 @@
             <h3>Infection Control Cleaning</h3>
             <p>Specialized decontamination to neutralize viruses and bacteria, creating a clinically safe home environment for vulnerable individuals.</p>
           </div>
-          <a href="#calculator" class="btn-text">Estimate Cost</a>
+          <button class="btn-text" data-open-modal>Inquire Now</button>
         </div>
 
         <!-- 7. Post-discharge cleaning -->
@@ -304,123 +303,7 @@
     </div>
   </section>
 
-  <!-- Interactive Estimator Section -->
-  <section class="calculator-section" id="calculator">
-    <div class="container">
-      <div class="fade-in-up">
-        <span class="section-label">Self-Assessment Tool</span>
-        <h2 class="section-title">Instant Estimate Calculator</h2>
-        <p class="section-desc">Select your desired cleaning services, home size, and special requirements below to calculate a starting price estimate.</p>
-      </div>
 
-      <div class="calculator-grid">
-        <!-- Input Form -->
-        <div class="calculator-card fade-in-up">
-          
-          <!-- Service Types -->
-          <div class="calculator-form-group">
-            <label>1. Service Type</label>
-            <div class="option-cards-grid">
-              <div class="option-card selected" data-service="standard" data-multiplier="1.0">
-                <h4>Standard Care</h4>
-                <span>Routine cleaning & dusting</span>
-              </div>
-              <div class="option-card" data-service="deep" data-multiplier="1.5">
-                <h4>Deep Cleaning</h4>
-                <span>Detailed clinical scrub</span>
-              </div>
-              <div class="option-card" data-service="infection" data-multiplier="1.8">
-                <h4>Infection Control</h4>
-                <span>Clinical disinfection</span>
-              </div>
-              <div class="option-card" data-service="hoarding" data-multiplier="2.2">
-                <h4>Specialist Support</h4>
-                <span>Hoarding & self-neglect support</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Room Counts -->
-          <div class="calculator-form-group">
-            <label>2. Home Size Parameters</label>
-            <div class="range-slider-wrapper" style="margin-bottom: 2rem;">
-              <div class="range-slider-header">
-                <span>Bedrooms</span>
-                <span style="font-weight: 600; color: var(--accent);"><span id="calc-bedrooms-val">2</span> Bedrooms</span>
-              </div>
-              <input type="range" class="range-slider" id="calc-bedrooms" min="1" max="6" value="2" step="1">
-            </div>
-
-            <div class="range-slider-wrapper">
-              <div class="range-slider-header">
-                <span>Bathrooms</span>
-                <span style="font-weight: 600; color: var(--accent);"><span id="calc-bathrooms-val">1</span> Bathrooms</span>
-              </div>
-              <input type="range" class="range-slider" id="calc-bathrooms" min="1" max="4" value="1" step="1">
-            </div>
-          </div>
-
-          <!-- Addons -->
-          <div class="calculator-form-group">
-            <label>3. Add-on Care Requirements</label>
-            <div class="checkbox-group">
-              <label class="checkbox-label">
-                <input type="checkbox" name="Eco-Friendly Products Only" data-cost="10">
-                <span class="custom-checkbox"></span>
-                <span>Use 100% Eco-Friendly & Sustainable Products (+£10)</span>
-              </label>
-
-              <label class="checkbox-label">
-                <input type="checkbox" name="DBS Checked Care Specialist" data-cost="20">
-                <span class="custom-checkbox"></span>
-                <span>Deploy DBS-Checked Specialist Cleaning Team (+£20)</span>
-              </label>
-
-              <label class="checkbox-label">
-                <input type="checkbox" name="Care Manager Pre-Consultation" data-cost="50">
-                <span class="custom-checkbox"></span>
-                <span>Social Worker / Care Manager pre-assessment & report (+£50)</span>
-              </label>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Sticky Results Card -->
-        <div class="calculator-results fade-in-up" style="transition-delay: 0.2s;">
-          <span class="section-label">Your Custom Plan</span>
-          <h3 style="color: var(--text-white); font-size: 1.5rem; font-weight: 400; margin-top: 1rem;">Estimated Starting Rate</h3>
-          
-          <div class="calc-price-display">
-            <span class="currency">£</span>
-            <span class="price" id="estimated-price">75</span>
-            <span class="frequency">GBP*</span>
-          </div>
-
-          <div class="calc-price-details">
-            <div class="calc-detail-row">
-              <span>Service Tier:</span>
-              <strong id="detail-service">Standard Care</strong>
-            </div>
-            <div class="calc-detail-row">
-              <span>Property:</span>
-              <strong id="detail-home-size">2 Bed, 1 Bath</strong>
-            </div>
-            <div class="calc-detail-row">
-              <span>Special Requests:</span>
-              <strong id="detail-extras" style="max-width: 55%; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">None</strong>
-            </div>
-          </div>
-
-          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-bottom: 2rem; line-height: 1.5;">
-            *Please note: This is an estimated starting price. All care-related cleanups undergo a personalized consultation with our management team to match care budgets and medical requirements.
-          </p>
-
-          <button class="btn btn-accent" id="book-estimate-btn" style="width: 100%;">Request This Care Plan</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Testimonials Section -->
   <section class="testimonials">
@@ -673,7 +556,7 @@
             <li><a href="#about">About Our Story</a></li>
             <li><a href="#why-choose-us">Why Choose Us</a></li>
             <li><a href="#services">Our Services</a></li>
-            <li><a href="#calculator">Pricing Estimate</a></li>
+
             <li><a href="#contact">Contact Us</a></li>
           </ul>
         </div>
